@@ -50,7 +50,7 @@ def insert_user_data():
             cursor.execute("INSERT INTO users (email, nome, password, valid_until) VALUES (?, ?, ?, ?)", user)
             conn.commit()
         except sqlite3.IntegrityError:
-            print(f"Registro com email '{user[0]}' já existe. Ignorando a inserção.")
+            print(f"Registro com email '{user[0]}' já existe. Ignorando a inserção..")
 
     cursor.close()  # Close the cursor
 
