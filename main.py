@@ -83,12 +83,14 @@ def handle_notification():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    connection = get_connection()
+    cursor = connection.cursor()
+
     # Obter dados do formulário de login
     username = request.form.get("username")
     password = request.form.get("password")
 
     # Verificar credenciais no banco de dados
-    conn, cursor = get_connection()
     cursor.execute("SELECT * FROM users WHERE email = ?", (username,))
     user = cursor.fetchone()
 
@@ -122,6 +124,9 @@ def login():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
+    connection = get_connection()
+    cursor = connection.cursor()
+
     # Verificar se o usuário está autenticado
     if "username" not in session:
         return redirect(url_for("index"))
@@ -130,7 +135,6 @@ def home():
     username = session["username"]
 
     # Recuperar informações do usuário no banco de dados
-    conn, cursor = get_connection()
     cursor.execute("SELECT * FROM users WHERE email = ?", (username,))
     user = cursor.fetchone()
     valid_until = user[3]
