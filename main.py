@@ -103,7 +103,7 @@ def login():
     if valid_until < datetime.now():
         cursor.close()  # Close the cursor
         conn.close()  # Close the connection
-        return render_template("error.html", message="Data de validade expirada!")
+        return render_template("error.html", message="Data de validade expirada!!")
 
     # Definir a sessão do usuário após o login bem-sucedido
     session["username"] = username
