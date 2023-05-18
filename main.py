@@ -37,7 +37,7 @@ cursor.execute("""
 # Insert user data into the 'users' table
 def insert_user_data():
     user_data = [
-        ('usuario1@gmail.com', 'Daniel', 'senha1', '2022-08-20'),
+        ('usuario1@gmail.com', 'Danielzin', 'senha1', '2022-08-20'),
         ('alcapone@al.c', 'Alcapone', '123456', '2023-07-20'),
         ('trial@trial.com', 'Trial', 'senha3', '2023-05-15'),
         ('cliente@84.com', 'Indisponivel..', '1231232', '2023-08-12'),
