@@ -94,15 +94,15 @@ def login():
 
     if user is None or password != user[2]:
         error = True
-        cursor.close()  # Close the cursor
-        conn.close()  # Close the connection
+        cursor.close()  # Remova esta linha
+        conn.close()  # Remova esta linha
         return render_template("login.html", error=error)
 
     # Verificar a validade do usuário
     valid_until = datetime.strptime(user[3], "%Y-%m-%d")
     if valid_until < datetime.now():
-        cursor.close()  # Close the cursor
-        conn.close()  # Close the connection
+        cursor.close()  # Remova esta linha
+        conn.close()  # Remova esta linha
         return render_template("error.html", message="Data de validade expirada!")
 
     # Definir a sessão do usuário após o login bem-sucedido
@@ -113,12 +113,12 @@ def login():
     cursor.execute("UPDATE users SET valid_until = ? WHERE email = ?", (new_valid_until, username))
     conn.commit()
 
-    cursor.close()  # Close the cursor
-    conn.close()  # Close the connection
+    # Remova as linhas abaixo, pois a conexão será fechada automaticamente ao final da solicitação
+    # cursor.close()
+    # conn.close()
 
     # Redirecionar para a página inicial após o login bem-sucedido
     return redirect(url_for("home"))
-
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
