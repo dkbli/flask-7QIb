@@ -227,9 +227,6 @@ def create_user():
         return jsonify({'message': 'User created successfully.'})
     except sqlite3.IntegrityError:
         return jsonify({'error': 'User with the same email already exists.'}), 400
-    finally:
-        cursor.close()
-        conn.close()
 
 
 @app.route("/admin/users/<email>", methods=["GET", "POST"])
@@ -272,9 +269,6 @@ def update_user(email):
         return jsonify({'message': 'User updated successfully.'})
     except sqlite3.IntegrityError:
         return jsonify({'error': 'User with the same email already exists.'}), 400
-    finally:
-        cursor.close()
-        conn.close()
 
 
 @app.route("/admin/users/<email>/delete", methods=["GET", "POST"])
