@@ -209,7 +209,7 @@ def home_admin():
     return render_template("home_admin.html", users=users)
 
 
-@app.route("/admin/users/create", methods=["POST"])
+@app.route("/admin/users/create", methods=["GET", "POST"])
 def create_user():
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
@@ -232,7 +232,7 @@ def create_user():
         conn.close()
 
 
-@app.route("/admin/users/<email>", methods=["GET"])
+@app.route("/admin/users/<email>", methods=["GET", "POST"])
 def get_user(email):
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
@@ -255,7 +255,7 @@ def get_user(email):
         return jsonify({'error': 'User not found.'}), 404
 
 
-@app.route("/admin/users/<email>/update", methods=["POST"])
+@app.route("/admin/users/<email>/update", methods=["GET", "POST"])
 def update_user(email):
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
@@ -277,7 +277,7 @@ def update_user(email):
         conn.close()
 
 
-@app.route("/admin/users/<email>/delete", methods=["POST"])
+@app.route("/admin/users/<email>/delete", methods=["GET", "POST"])
 def delete_user(email):
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
