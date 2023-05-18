@@ -94,15 +94,15 @@ def login():
 
     if user is None or password != user[2]:
         error = True
-        cursor.close()  # Remova esta linha
-        conn.close()  # Remova esta linha
+        # cursor.close()  # Remova esta linha
+        # conn.close()  # Remova esta linha
         return render_template("login.html", error=error)
 
     # Verificar a validade do usuário
     valid_until = datetime.strptime(user[3], "%Y-%m-%d")
     if valid_until < datetime.now():
-        cursor.close()  # Remova esta linha
-        conn.close()  # Remova esta linha
+        # cursor.close()  # Remova esta linha
+        # conn.close()  # Remova esta linha
         return render_template("error.html", message="Data de validade expirada!")
 
     # Definir a sessão do usuário após o login bem-sucedido
