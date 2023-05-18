@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.min.js"></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+        <title>Home</title>
+    </head>
+    <header>
+        <div style="display: flex; align-items: center;">
+        <img src="{{ url_for('static', filename='images/iconss.png') }}">
+        <div class="header__divider"></div>
+        <h4>Bem-vindo, {{nome}}</h4>
+        </div>
+        <div>
+        <a href="/logout" >
+            <h4 style="margin-right: 10px;">Logout</h4>
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+        </div>
+    </header>
+    <body>
+        <div class="navigation">
+            <ul>
+                <li class="list">
+                    <a id="perfil-link">
+                        <span class="icon"><ion-icon name="person-outline" /></span>
+                        <span class="text">Perfil</span>
+                    </a>
+                </li>
+                <li class="list active">
+                    <a id="home-link">
+                        <span class="icon"><ion-icon name="home" /></span>
+                        <span class="text">Home</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a id="ajustes-link" >
+                        <span class="icon"><ion-icon name="settings-outline" /></span>
+                        <span class="text">Ajustes</span>
+                    </a>
+                </li>
+                <div class="indicator"></div>
+            </ul>
+        </div>
+        <section id="home-section">
+            <div class="images"> 
+                <h1 class="h1primeiro" style="color: #fff;">Games</h1>
+                <a id="game-mines">
+                  <img src="{{ url_for('static', filename='images/cliqueparaabrir.png') }}" alt="Image 1">
+                </a>
+            </div>  
+          </section>     
+          <section id="perfil-section" style="display: none;">
+            <div class="images">
+                          <h2 style="color: #fff;">Perfil</h2>
+            <p style="color: #fff;">Seu E-Mail : {{username}} </p>
+            <p style="color: #fff;">Validade : {{valid_until}} </p>
+            </div>
+          </section>
+          
+          <section id="ajustes-section" style="display: none;">
+            <div class="images">
+            <h2 style="color :  #fff">Ajustes</h2>
+            <p style="color :  #fff">Paigna indisponivel!!..</p>
+            </div>
+          </section>
+          <section id="games-section" style="display: none;">
+            <div class="images">
+                <h1 class="h1segundo"  style="color: #fff;"><b style="color: #5b05ac;">{{nome}} </b> escolha a plataforma ou provedor de jogo!</h1>
+                <a id="spribe-link">
+                    <img src="{{ url_for('static', filename='images/spribe.png') }}" alt="Image 1">
+                </a>
+            </div>
+          </section>
+          <section id="spribe-section" style="display: none;">
+            <div class="images">
+                <h1 class="h1terceiro"  style="color: #fff;"><b style="color: #5b05ac;">{{nome}} </b> escolha o jogo!!</h1>
+                <a id="game-mines">
+                  <img src="{{ url_for('static', filename='images/turbomines.png') }}" alt="Image 1">
+                </a>
+                <img src="{{ url_for('static', filename='images/minesblock.png') }}" alt="Image 1">
+            </div>
+            <script>
+              const mineslink = document.querySelector("#game-mines");
+
+
+
+              mineslink.addEventListener("click", function () {
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Ao clicar em OK, você irá para pagina do hacker',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+        let timerInterval
+Swal.fire({
+  title: 'Redirecionando!',
+  html: 'Aguarde <b></b> milesegundos.',
+  timer: 3500,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  window.location.href = "/mines";
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('minesa')
+  }
+})
+    }
+  })
+});
+
+            </script>
+          </section>
+<script>
+const homeLink = document.querySelector("#home-link");
+const perfilLink = document.querySelector("#perfil-link");
+const ajustesLink = document.querySelector("#ajustes-link");
+const gamesLink = document.querySelector("#games-link");
+const spriblelink = document.querySelector("#spribe-link");
+
+const homeSection = document.querySelector("#home-section");
+const perfilSection = document.querySelector("#perfil-section");
+const ajustesSection = document.querySelector("#ajustes-section");
+const gamesSection = document.querySelector("#games-section");
+const spribesection = document.querySelector("#spribe-section");
+
+homeLink.addEventListener("click", function () {
+homeSection.style.display = "block";
+perfilSection.style.display = "none";
+ajustesSection.style.display = "none";
+gamesSection.style.display = "none";
+spribesection.style.display = "none";
+});
+
+perfilLink.addEventListener("click", function () {
+homeSection.style.display = "none";
+perfilSection.style.display = "block";
+ajustesSection.style.display = "none";
+gamesSection.style.display = "none";
+spribesection.style.display = "none";
+});
+
+ajustesLink.addEventListener("click", function () {
+homeSection.style.display = "none";
+perfilSection.style.display = "none";
+gamesSection.style.display = "none";
+ajustesSection.style.display = "block";
+spribesection.style.display = "none";
+});
+
+gamesLink.addEventListener("click", function () {
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Ao clicar em OK, você irá para pagina de seleção de provedor ou plataforma!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+        let timerInterval
+Swal.fire({
+  title: 'Redirecionando!',
+  html: 'Aguarde <b></b> milesegundos.',
+  timer: 3500,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+    homeSection.style.display = "none";
+    perfilSection.style.display = "none";
+    gamesSection.style.display = "block";
+    ajustesSection.style.display = "none";
+    spribesection.style.display = "none";
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('hi')
+  }
+})
+    }
+  })
+});
+
+spriblelink.addEventListener("click", function () {
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Ao clicar em OK, você irá para pagina de seleção de jogos!!!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+let timerInterval
+Swal.fire({
+  title: 'Redirecionando!',
+  html: 'Aguarde <b></b> milesegundos.',
+  timer: 4500,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+    homeSection.style.display = "none";
+    perfilSection.style.display = "none";
+    gamesSection.style.display = "none";
+    ajustesSection.style.display = "none";
+    spribesection.style.display = "block";
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('bieno')
+  }
+})
+    }
+  })
+});
+
+</script>              
+
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
+
+        <script
+            type="module"
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+        ></script>
+        <script
+            nomodule
+            src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+        ></script>
+    </body>
+</html>

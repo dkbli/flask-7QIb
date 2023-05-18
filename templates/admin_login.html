@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Admin Login</h1>
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        <form method="post" action="/adminlogin">
+            <div class="form-group">
+                <label for="admin_username">Username:</label>
+                <input type="text" class="form-control" id="admin_username" name="admin_username" required>
+            </div>
+            <div class="form-group">
+                <label for="admin_password">Password:</label>
+                <input type="password" class="form-control" id="admin_password" name="admin_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

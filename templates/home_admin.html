@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Welcome, Admin</h1>
+        <h2>Users</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Password</th>
+                    <th>Valid Until</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                    <td>{{ user[3] }}</td>
+                    <td>
+                        <a href="/admin/users/{{ user[0] }}" class="btn btn-primary">View</a>
+                        <a href="/admin/users/{{ user[0] }}/update" class="btn btn-warning">Update</a>
+                        <form method="post" action="/admin/users/{{ user[0] }}/delete" style="display:inline;">
+                            <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this user?')" class="btn btn-danger">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>Create User</h2>
+        <form method="post" action="/admin/users/create">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="nome">Name:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="valid_until">Valid Until:</label>
+                <input type="date" class="form-control" id="valid_until" name="valid_until" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Create User</button>
+        </form>
+        <br>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
