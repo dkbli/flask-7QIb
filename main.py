@@ -207,6 +207,7 @@ def home_admin():
     # conn.close()
 
     return render_template("home_admin.html", users=users)
+conn.commit()
 
 
 @app.route("/admin/users/create", methods=["POST"])
@@ -227,6 +228,7 @@ def create_user():
         return jsonify({'message': 'User created successfully.'})
     except sqlite3.IntegrityError:
         return jsonify({'error': 'User with the same email already exists.'}), 400
+conn.commit()
 
 
 @app.route("/admin/users/<email>", methods=["GET"])
@@ -248,6 +250,7 @@ def get_user(email):
         return jsonify(user_data)
     else:
         return jsonify({'error': 'User not found.'}), 404
+conn.commit()
 
 
 @app.route("/admin/users/<email>/update", methods=["POST"])
@@ -267,6 +270,7 @@ def update_user(email):
         return jsonify({'message': 'User updated successfully.'})
     except sqlite3.IntegrityError:
         return jsonify({'error': 'User with the same email already exists.'}), 400
+conn.commit()
 
 
 @app.route("/admin/users/<email>/delete", methods=["POST"])
@@ -278,7 +282,7 @@ def delete_user(email):
     cursor.execute("DELETE FROM users WHERE email = ?", (email,))
 
     return jsonify({'message': 'User deleted successfully.'})
-
+conn.commit()
 
 
 
