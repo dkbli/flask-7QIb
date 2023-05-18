@@ -209,7 +209,7 @@ def home_admin():
     return render_template("home_admin.html", users=users)
 
 
-@app.route("/admin/users/create", methods=["GET", "POST"])
+@app.route("/admin/users/create", methods=["POST"])
 def create_user():
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
@@ -229,7 +229,7 @@ def create_user():
         return jsonify({'error': 'User with the same email already exists.'}), 400
 
 
-@app.route("/admin/users/<email>", methods=["GET", "POST"])
+@app.route("/admin/users/<email>", methods=["GET"])
 def get_user(email):
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
@@ -237,8 +237,6 @@ def get_user(email):
     conn, cursor = get_connection()
     cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
     user = cursor.fetchone()
-    cursor.close()
-    conn.close()
 
     if user:
         user_data = {
@@ -252,7 +250,7 @@ def get_user(email):
         return jsonify({'error': 'User not found.'}), 404
 
 
-@app.route("/admin/users/<email>/update", methods=["GET", "POST"])
+@app.route("/admin/users/<email>/update", methods=["POST"])
 def update_user(email):
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
@@ -271,18 +269,16 @@ def update_user(email):
         return jsonify({'error': 'User with the same email already exists.'}), 400
 
 
-@app.route("/admin/users/<email>/delete", methods=["GET", "POST"])
+@app.route("/admin/users/<email>/delete", methods=["POST"])
 def delete_user(email):
     if 'admin_authenticated' not in session or not session['admin_authenticated']:
         return jsonify({'error': 'Admin not authenticated.'}), 401
 
     conn, cursor = get_connection()
     cursor.execute("DELETE FROM users WHERE email = ?", (email,))
-    conn.commit()
-    cursor.close()
-    conn.close()
 
     return jsonify({'message': 'User deleted successfully.'})
+
 
 
 
