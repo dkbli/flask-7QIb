@@ -21,7 +21,7 @@ def get_connection():
     return local.connection, local.cursor
 
 
-conn = sqlite3.connect('/app/users.db')
+conn = sqlite3.connect('users.db')
 cursor = conn.cursor()
 
 # Create the 'users' table if it doesn't exist
@@ -81,7 +81,7 @@ def handle_notification():
     return jsonify({email: user_data})
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     # Obter dados do formulário de login
     username = request.form.get("username")
@@ -120,7 +120,7 @@ def login():
     return redirect(url_for("home"))
 
 
-@app.route("/home")
+@app.route("/home", methods=["GET", "POST"])
 def home():
     # Verificar se o usuário está autenticado
     if "username" not in session:
