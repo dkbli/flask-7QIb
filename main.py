@@ -21,7 +21,7 @@ def get_connection():
     return local.connection, local.cursor
 
 
-conn = sqlite3.connect('users.db')
+conn = sqlite3.connect('/app/users.db')
 cursor = conn.cursor()
 
 # Create the 'users' table if it doesn't exist
