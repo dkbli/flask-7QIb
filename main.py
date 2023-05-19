@@ -167,6 +167,28 @@ def gerador():
                            username=username,
                            valid_until=valid_until)
 
+@app.route('/fortunetiger')
+def gerador():
+    # Verificar se o usuário está autenticado
+    if "username" not in session:
+        return redirect(url_for("index"))
+
+    # Obter o nome de usuário da sessão
+    username = session["username"]
+
+    # Recuperar informações do usuário no banco de dados
+    conn, cursor = get_connection()
+    cursor.execute("SELECT * FROM users WHERE email = ?", (username,))
+    user = cursor.fetchone()
+    valid_until = user[3]
+
+    # Formatar a data de validade para exibição
+    valid_until = datetime.strptime(valid_until, "%Y-%m-%d").strftime("%d/%m/%Y")
+
+    return render_template("fortunetiger.html",
+                           username=username,
+                           valid_until=valid_until)
+
 
 @app.route("/logout")
 def logout():
