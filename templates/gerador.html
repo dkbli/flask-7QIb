@@ -917,20 +917,20 @@ Swal.fire({
 
   // Inicia o timer e bloqueia o botão durante o tempo definido
   const timer = document.getElementById("countdown");
-const timeLeft = 120;
+const timeLeft = 90;
 let timeRemaining = timeLeft;
 const timerInterval = setInterval(() => {
   timeRemaining--;
   timer.innerText = timeRemaining;
 
   // Define a cor do timer com base no tempo restante
-  if (timeRemaining >= 80) {
-    timer.style.color = "green";
-  } else if (timeRemaining >= 60) {
+  if (timeRemaining >= 70) {
     timer.style.color = "darkgreen";
-  } else if (timeRemaining >= 40) {
+  } else if (timeRemaining >= 50) {
+    timer.style.color = "green";
+  } else if (timeRemaining >= 30) {
     timer.style.color = "orange";
-  } else if (timeRemaining >= 15) {
+  } else if (timeRemaining >= 10) {
     timer.style.color = "yellow";
   } else {
     timer.style.color = "red";
