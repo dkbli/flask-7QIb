@@ -233,8 +233,8 @@ header img{
 }
 @media (max-width: 768px) {
 .images img{
-  margin: 5px;
-  width: 80%;
+  margin: 3px;
+  width: 90%;
   height: auto;
   border-radius: 10px;
 }
