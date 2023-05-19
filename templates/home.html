@@ -59,6 +59,9 @@
                 <a id="game-mines">
                   <img src="{{ url_for('static', filename='images/cliqueparaabrir.png') }}" alt="Image 1">
                 </a>
+                 <a id="game-fortunetiger">
+                  <img src="{{ url_for('static', filename='images/cliqueparaabrir.png') }}" alt="Image 1">
+                </a>
             </div>  
           </section>     
           <section id="perfil-section" style="display: none;">
@@ -125,6 +128,49 @@ Swal.fire({
   }
 }).then((result) => {
   window.location.href = "/mines";
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('minesa')
+  }
+})
+    }
+  })
+});
+
+            </script>
+            <script>
+              const mineslink = document.querySelector("#game-fortunetiger");
+
+
+
+              mineslink.addEventListener("click", function () {
+  Swal.fire({
+    title: 'Tem certeza?',
+    text: 'Ao clicar em OK, você irá para pagina do hacker',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'OK',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+        let timerInterval
+Swal.fire({
+  title: 'Redirecionando!',
+  html: 'Aguarde <b></b> milesegundos.',
+  timer: 3500,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  window.location.href = "/fortunetiger";
   if (result.dismiss === Swal.DismissReason.timer) {
     console.log('minesa')
   }
