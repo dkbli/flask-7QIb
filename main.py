@@ -168,7 +168,7 @@ def gerador():
                            valid_until=valid_until)
 
 @app.route('/fortunetiger')
-def gerador():
+def fortune():
     # Verificar se o usuário está autenticado
     if "username" not in session:
         return redirect(url_for("index"))
