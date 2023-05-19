@@ -231,3 +231,11 @@ header img{
   margin-top: 5px;
   margin-bottom: 7px;
 }
+@media (max-width: 768px) {
+.images img{
+  margin: 5px;
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+}
+}
